@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>什麼是 AI agent？｜15 秒動畫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<style>
+  :root { --bg:#0B1E3F; --y:#FFC93C; --w:#fff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { height:100%; background:#000; overflow:hidden; }
+  body { display:flex; align-items:center; justify-content:center;
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif; color:var(--w); }
+  #stage { position:relative; width:min(100vw, 177.78vh); height:min(56.25vw, 100vh);
+    background:var(--bg); overflow:hidden; font-size:min(1vw, 1.778vh); }
+  .scene { position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; opacity:0; }
+  .y { color:var(--y); }
+  h1 { font-size:7.2em; font-weight:900; }
+  .sub { font-size:2.9em; margin-top:1em; opacity:.85; }
+  .cards { display:flex; gap:6em; }
+  .card { width:35em; height:22em; border-radius:2em; background:rgba(255,255,255,.08);
+    border:.4em solid rgba(255,255,255,.3); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; }
+  .card.hl { border-color:var(--y); }
+  .card b { font-size:4.4em; font-weight:900; }
+  .card.hl b { color:var(--y); }
+  .card span { font-size:3.1em; margin-top:.6em; }
+  .steps { display:flex; align-items:center; gap:2.5em; }
+  .step { display:flex; flex-direction:column; align-items:center; opacity:.25; }
+  .dot { width:13.5em; height:13.5em; border-radius:50%; background:rgba(255,255,255,.12);
+    display:flex; align-items:center; justify-content:center; font-size:1em; }
+  .dot i { font-style:normal; font-size:6.8em; font-weight:900; }
+  .step.on .dot { background:var(--y); color:var(--bg); }
+  .step span { font-size:2.9em; margin-top:.6em; }
+  .arrow { font-size:4.6em; color:var(--y); opacity:0; }
+  .loopline { font-size:2.9em; margin-top:2em; opacity:0; }
+  .end { font-size:6.2em; font-weight:900; }
+  #replay { position:absolute; right:2.5em; bottom:2.5em; font:inherit; font-size:2.2em;
+    padding:.5em 1.1em; border:0; border-radius:.6em; background:var(--y); color:var(--bg);
+    font-weight:900; cursor:pointer; opacity:0; pointer-events:none; }
+  #replay.show { opacity:1; pointer-events:auto; }
+  .noanim .scene { position:relative; inset:auto; opacity:1 !important; margin:1em 0; }
+  .noanim #stage { overflow:auto; }
+  .noanim .step, .noanim .arrow, .noanim .loopline { opacity:1; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <section class="scene" id="s1">
+    <h1>什麼是 <span class="y">AI agent</span>？</h1>
+    <p class="sub">15 秒看懂</p>
+  </section>
+  <section class="scene" id="s2">
+    <div class="cards">
+      <div class="card" id="c1"><b>聊天機器人</b><span>你問，它答</span></div>
+      <div class="card hl" id="c2"><b>AI agent</b><span>你交代，它去做</span></div>
+    </div>
+  </section>
+  <section class="scene" id="s3">
+    <div class="steps">
+      <div class="step"><div class="dot"><i>看</i></div><span>讀資料</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="dot"><i>想</i></div><span>排步驟</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="dot"><i>做</i></div><span>用工具</span></div>
+    </div>
+    <p class="loopline">做完再看結果，不對就再來一輪</p>
+  </section>
+  <section class="scene" id="s4">
+    <p class="end">你給<span class="y">目標</span>，它跑<span class="y">流程</span></p>
+    <p class="sub">藍鴨 Launchdock Lab</p>
+  </section>
+  <button id="replay">▶ 再播一次</button>
+</div>
+<script>
+(function () {
+  var replay = document.getElementById('replay');
+  if (typeof anime === 'undefined') { document.body.classList.add('noanim'); return; }
+  var all = '.scene, .scene h1, .scene .sub, .card, .step, .arrow, .loopline, .end';
+
+  function reset() {
+    anime.remove(all);
+    document.querySelectorAll(all).forEach(function (el) { el.removeAttribute('style'); });
+    document.querySelectorAll('.step').forEach(function (el) { el.classList.remove('on'); });
+    replay.classList.remove('show');
+  }
+
+  function play() {
+    reset();
+    var tl = anime.timeline({ easing: 'easeOutCubic' });
+    // 第 1 段 0–3 秒
+    tl.add({ targets: '#s1', opacity: [0, 1], duration: 1 }, 0)
+      .add({ targets: '#s1 h1', scale: [0.3, 1], opacity: [0, 1], duration: 800, easing: 'easeOutBack' }, 0)
+      .add({ targets: '#s1 .sub', opacity: [0, 0.85], translateY: [20, 0], duration: 600 }, 800)
+      .add({ targets: '#s1', opacity: 0, duration: 300 }, 2700)
+    // 第 2 段 3–7 秒
+      .add({ targets: '#s2', opacity: [0, 1], duration: 1 }, 3000)
+      .add({ targets: '#c1', translateX: ['-60vw', 0], opacity: [0, 1], duration: 800 }, 3000)
+      .add({ targets: '#c2', translateX: ['60vw', 0], opacity: [0, 1], duration: 800 }, 3800)
+      .add({ targets: '#s2', opacity: 0, duration: 300 }, 6700)
+    // 第 3 段 7–12 秒
+      .add({ targets: '#s3', opacity: [0, 1], duration: 1 }, 7000);
+    var steps = document.querySelectorAll('.step'), arrows = document.querySelectorAll('.arrow');
+    steps.forEach(function (st, i) {
+      var t = 7300 + i * 1000;
+      if (i > 0) tl.add({ targets: arrows[i - 1], opacity: [0, 1], duration: 300 }, t - 300);
+      tl.add({ targets: st, opacity: [0.25, 1], scale: [0.7, 1], duration: 600, easing: 'easeOutBack',
+        begin: function () { st.classList.add('on'); } }, t);
+    });
+    tl.add({ targets: '.loopline', opacity: [0, 1], translateY: [20, 0], duration: 600 }, 10200)
+      .add({ targets: '#s3', opacity: 0, duration: 300 }, 11700)
+    // 第 4 段 12–15 秒
+      .add({ targets: '#s4', opacity: [0, 1], duration: 1 }, 12000)
+      .add({ targets: '#s4 .end', translateY: [40, 0], opacity: [0, 1], duration: 800 }, 12000)
+      .add({ targets: '#s4 .sub', opacity: [0, 0.85], duration: 600 }, 12700)
+      .add({ targets: '#s4', opacity: 1, duration: 1 }, 14999); // 停到 15 秒
+    tl.finished.then(function () { replay.classList.add('show'); });
+  }
+
+  replay.addEventListener('click', play);
+  play();
+})();
+</script>
+</body>
+</html>

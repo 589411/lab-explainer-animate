@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>免安裝：一段文字做動畫解說｜藍鴨 Launchdock Lab</title>
+<meta name="description" content="你不用會寫程式，也不用安裝任何東西：把一段文字貼給網頁版 AI，它就做出 15 秒的動畫解說。">
+<meta property="og:image" content="https://animate.launchdock.app/poster.png">
+<style>
+  :root { --bg:#0B1E3F; --card:#13284f; --y:#FFC93C; --fg:#f4f6fb; --mute:#a9b4cc; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif; line-height:1.75; }
+  main { max-width:920px; margin:0 auto; padding:32px 20px 64px; }
+  a { color:var(--y); }
+  h1 { font-size:2rem; margin:.2em 0; }
+  h2 { font-size:1.3rem; margin:2em 0 .5em; }
+  h3 { font-size:1.05rem; margin:1.4em 0 .3em; }
+  .lead { font-size:1.1rem; }
+  .frame { position:relative; width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden; background:#000; }
+  .frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .step { display:inline-block; background:var(--y); color:var(--bg); font-weight:700; border-radius:999px; padding:0 .7em; margin-right:.4em; }
+  .box { position:relative; background:var(--card); border-radius:12px; padding:16px; }
+  pre { margin:0; white-space:pre-wrap; word-break:break-word; font-size:.88rem; max-height:420px; overflow:auto;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  button { position:sticky; float:right; top:0; background:var(--y); color:var(--bg); border:0; border-radius:8px;
+    padding:6px 14px; font-weight:700; cursor:pointer; font-size:.95rem; }
+  ol li, ul li { margin:.5em 0; }
+  code { background:rgba(255,255,255,.1); padding:0 .3em; border-radius:4px; }
+  .note { font-size:.92rem; color:var(--mute); }
+  .tip { border-left:4px solid var(--y); padding:.4em 1em; background:rgba(255,201,60,.08); border-radius:0 8px 8px 0; }
+</style>
+</head>
+<body><main>
+<p class="note"><a href="https://lab.launchdock.app">← 藍鴨 AI 實例庫</a></p>
+<h1>✨ 免安裝：一段文字做動畫解說</h1>
+<p class="lead"><strong>你不用會寫程式，也不用安裝任何東西。</strong>只要會用瀏覽器，把一段文字貼給網頁版 AI，它就會做出下面這段 15 秒的動畫。</p>
+
+<h2><span class="step">1</span>先看成品</h2>
+<div class="frame"><iframe src="ai-agent.html" title="15 秒動畫：什麼是 AI agent" loading="lazy"></iframe></div>
+<p class="note">播完右下角會出現「▶ 再播一次」。<a href="ai-agent.html" target="_blank">開新視窗看全螢幕</a>・<a href="ai-agent.html" download>下載這個 HTML 檔</a></p>
+<p class="tip">老實說：這是「網頁動畫」，不是影片檔（MP4）。它在瀏覽器裡播放。想要影片檔，用螢幕錄影錄下來就好，下面會教你。<br>想直接做出 MP4 影片，請看進階版：<a href="https://explainer.launchdock.app">一句話做解說影片</a>。</p>
+
+<h2><span class="step">2</span>照著做（只要瀏覽器）</h2>
+<ol>
+  <li><strong>打開一個網頁版 AI。</strong>下面三個選一個，免費帳號就能試：
+    <ul>
+      <li>Claude：<a href="https://claude.ai">claude.ai</a></li>
+      <li>ChatGPT：<a href="https://chatgpt.com">chatgpt.com</a></li>
+      <li>Gemini：<a href="https://gemini.google.com">gemini.google.com</a></li>
+    </ul></li>
+  <li><strong>用 Gemini 的人先做這步。</strong>在輸入框下方點「Canvas」（畫布，可以直接預覽網頁的功能），再貼文字。Claude 和 ChatGPT 不用另外設定。</li>
+  <li><strong>貼上文字。</strong>按下面的「複製」按鈕，回到 AI 的輸入框，貼上（Mac 按 ⌘V，Windows 按 Ctrl+V），按送出。</li>
+  <li><strong>等它寫。</strong>它會跑出一大段程式碼，大約 30 秒到 2 分鐘。看不懂沒關係，你不用看。</li>
+  <li><strong>看動畫。</strong>
+    <ul>
+      <li>Claude：右邊會打開一個「Artifact」（成品視窗），動畫直接在裡面播。</li>
+      <li>ChatGPT：程式碼會出現在「Canvas」（畫布）裡，按右上角的「預覽」。</li>
+      <li>Gemini：在 Canvas 右上角按「預覽」。</li>
+    </ul></li>
+  <li><strong>沒看到預覽也沒關係。</strong>把程式碼全部複製，打開「記事本」（Windows）或「文字編輯」（Mac，先按「格式 → 製作純文字」），貼上，存成 <code>animation.html</code>。雙擊這個檔案，就會用瀏覽器打開播放。</li>
+  <li><strong>畫面怪怪的？</strong>如果整片空白、字疊在一起或跑出畫面，回它一句：「畫面空白（或：字疊在一起），請修好，再給我完整的 HTML。」通常改一次就好。</li>
+  <li><strong>換成你的主題。</strong>把文字裡的「什麼是 AI agent」和四段內容換掉，再貼一次。</li>
+</ol>
+<div class="box"><button data-copy="prompt">複製</button><pre id="prompt">請幫我做一個「15 秒的動畫解說網頁」，主題是「什麼是 AI agent」。
+
+【輸出】
+只輸出「一個完整的 HTML 檔」，放在一個程式碼區塊裡。CSS 和 JavaScript 都寫在同一個檔案，不要分成多個檔案。可以用 Artifact 或 Canvas 預覽的話，請直接預覽。
+
+【工具】
+- 動畫用 Anime.js 3.2.2：&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js&quot;&gt;&lt;/script&gt;
+- 字型用 Google Fonts 的 Noto Sans TC（400 和 900），後面接系統字型：
+  font-family: &quot;Noto Sans TC&quot;, &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, sans-serif;
+- 不要用 import、模組或其他外部檔案，雙擊 .html 檔就要能播。
+
+【版面】
+- body 黑底、置中，裡面一個 16:9 的 #stage：
+  width: min(100vw, 177.78vh); height: min(56.25vw, 100vh); position: relative; overflow: hidden; 背景深藍 #0B1E3F。
+- 四個場景都是 #stage 裡的 &lt;section class=&quot;scene&quot;&gt;，每個都寫：
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0;
+- 白字，重點色鴨黃 #FFC93C。字級用 vmin，最大的字不超過 9vmin，畫面不能有字超出。
+
+【四個場景，總長 15 秒】
+第 1 段（0–3 秒）：大標「什麼是 AI agent？」彈出，下方小字「15 秒看懂」淡入。
+第 2 段（3–7 秒）：左右兩張卡依序滑入。左卡「聊天機器人」＋「你問，它答」；右卡「AI agent」＋「你交代，它去做」，右卡用鴨黃邊框。卡片寬 40vmin，文字不換行（white-space: nowrap）。
+第 3 段（7–12 秒）：三個圓圈從左到右依序亮起，中間有箭頭「→」。圓圈直徑 20vmin，圈裡只寫一個大字「看」「想」「做」，圈下方寫小字「讀資料」「排步驟」「用工具」。還沒亮是半透明灰圈，亮起時背景變鴨黃、字變深藍。三個都亮起後，底下出現一行「做完再看結果，不對就再來一輪」。
+第 4 段（12–15 秒）：結尾大字「你給目標，它跑流程」，下方小字「藍鴨 Launchdock Lab」。
+
+【動畫寫法】
+- 用一條 anime.timeline()，每一步都用第二個參數寫開始時間（毫秒），例如 tl.add({ targets: &#x27;#s2&#x27;, opacity: [0, 1], duration: 400 }, 3000)。
+- 每個場景播完要把它的 opacity 調回 0，下一個場景才出現，同一時間只看得到一個場景。
+- 帶單位的值一定要加引號，例如 translateY: [&#x27;3vmin&#x27;, 0]、translateX: [&#x27;-50vw&#x27;, 0]。
+- 不要用 offset 屬性，不要用 duration: 0（最短寫 1），場景切換只改 opacity，不要用 display:none 或 visibility:hidden。
+- 網頁一打開就自動播。
+- 如果 Anime.js 沒載到（typeof anime === &#x27;undefined&#x27;），就把所有場景直接顯示出來，畫面不能空白。
+
+【再播一次】
+- #stage 右下角放一個 &lt;button&gt;「▶ 再播一次」&lt;/button&gt;，一開始看不到（opacity: 0; pointer-events: none）。
+- 播完停在最後一個畫面，按鈕才出現。按了先把所有元素恢復原狀（清掉 inline style），再從頭播。
+
+【寫完自己檢查】
+第 1.5、5、10、14 秒時，畫面上只看得到該段的字，而且都在畫面中間；任何時候都不能整片空白。
+</pre></div>
+
+<h3>想要影片檔：用螢幕錄影</h3>
+<ul>
+  <li>先把動畫開成全螢幕，按「▶ 再播一次」。</li>
+  <li>Mac：按 ⌘⇧5，選「錄製選取的部分」，框住動畫，按「錄製」。播完按上方選單列的停止鍵，影片會存在桌面。</li>
+  <li>Windows 11：打開「剪取工具」（Snipping Tool），切到「錄製」，框住動畫後按「開始」。</li>
+  <li>手機也可以：打開動畫網頁，用手機內建的「螢幕錄影」。</li>
+</ul>
+
+<h2><span class="step">3</span>進階：存成固定的小幫手，下次只要說主題</h2>
+<p>「技能」（skill）是一份給 AI 看的說明書。存起來以後，AI 會記得怎麼做，你只要說「主題：〇〇」。不過，不是每個網頁版 AI 都能裝技能：</p>
+<ul>
+  <li><strong>Claude：可以裝技能。</strong>到「設定 → 功能」（Settings → Capabilities）打開「程式碼執行與建立檔案」，再到「自訂 → 技能」（Customize → Skills）按「＋」，選「上傳技能」，上傳 <a href="animated-explainer.zip" download>animated-explainer.zip</a>。</li>
+  <li><strong>ChatGPT：個人帳號目前不能上傳技能</strong>（只有企業、教育版可以）。改用「專案」（Projects）：新增一個專案，在專案的「指示」裡貼上下面那段「小幫手指示」。之後在這個專案裡開新對話就好。</li>
+  <li><strong>Gemini：用 Gem（自訂小幫手）。</strong>到「Gem 管理員 → 新增 Gem」，在「指示」裡貼上下面那段「小幫手指示」，存好後開這個 Gem 聊天。記得一樣要打開 Canvas。</li>
+</ul>
+<h3>小幫手指示（貼進 ChatGPT 專案或 Gemini Gem）</h3>
+<div class="box"><button data-copy="instr">複製</button><pre id="instr">你是「15 秒動畫解說網頁」小幫手。我給你一個主題，你就照下面規則做。
+
+1. 主題不清楚才問我，最多問一題。只給主題的話，自己寫四段內容：開場標題、對比或定義、三個步驟、一句結尾。
+2. 只輸出一個完整的 HTML 檔，放在一個程式碼區塊裡。CSS、JavaScript 都寫在同一個檔案，不用 import、不用模組。能用 Artifact 或 Canvas 預覽就用。
+3. 動畫用 Anime.js 3.2.2，從 https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js 載入。用 anime.timeline()，每一步用第二個參數寫開始時間（毫秒），例如 tl.add({...}, 3000)。不要用 offset 屬性，不要用 duration: 0（最短 1）。Anime.js 沒載到時，直接顯示所有文字。
+4. 字型用 Google Fonts 的 Noto Sans TC（400、900），後接 &quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, sans-serif。
+5. 深藍底 #0B1E3F、白字、重點色鴨黃 #FFC93C。整個視窗是 16:9 置中的動畫區，字級用 vw 或 vmin，不能超出畫面，每行最多 16 個中文字。
+6. 四個場景依序播放，共 15 秒（3、4、5、3 秒）。一打開就自動播。場景切換只改 opacity，不要用 display:none 或 visibility:hidden。
+7. 播完停在最後一個畫面，右下角出現「▶ 再播一次」，按了先把所有元素恢復原狀再從頭播。
+8. 寫完自己檢查：第 1.5、5、10、14 秒畫面上看得到哪些字，任何時候都不能整片空白。
+9. 程式碼後面用兩句話提醒我：可以直接預覽，或存成 animation.html 雙擊打開；想要影片檔就用螢幕錄影（Mac 按 ⌘⇧5，Windows 按 Win+Alt+R）。
+</pre></div>
+<h3>技能檔 SKILL.md（Claude，或 Claude Code、Codex 這類程式助手）</h3>
+<p class="note">zip 檔裡面就是這份。<a href="SKILL.md" download>單獨下載 SKILL.md</a></p>
+<div class="box"><button data-copy="skill">複製</button><pre id="skill">---
+name: animated-explainer
+description: 把一個主題做成 15 秒、四個場景的中文動畫解說網頁（單一 HTML 檔，用 Anime.js），附「再播一次」按鈕。使用者說「做一個動畫解說」「把這個主題做成 15 秒動畫」「做動畫網頁」時使用。
+---
+
+# 15 秒動畫解說網頁
+
+## 先問清楚（缺的才問，最多一題）
+- 主題是什麼？只給主題就自己寫四段內容：開場標題、對比或定義、三個步驟、一句結尾。
+- 沒說的就用預設：深藍底 #0B1E3F、白字、重點色鴨黃 #FFC93C。
+
+## 輸出規則
+1. 只輸出一個完整的 HTML 檔，放在一個程式碼區塊裡。CSS、JavaScript 都寫在同一個檔案，不用 import、不用模組。
+   能用「Artifact」或「Canvas」預覽就用，讓使用者直接看到動畫。
+2. 動畫用 Anime.js 3.2.2：
+   `&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js&quot;&gt;&lt;/script&gt;`
+   - 用 `anime.timeline()`，每一步用第二個參數寫開始時間（毫秒），例如 `tl.add({...}, 3000)`。
+   - 不要用 `offset` 屬性，不要用 `duration: 0`（最短 1）。
+   - Anime.js 沒載到時，直接顯示所有文字，畫面不能空白。
+3. 字型：Google Fonts 的 Noto Sans TC（400、900），後接 `&quot;PingFang TC&quot;, &quot;Microsoft JhengHei&quot;, sans-serif`。
+4. 版面：整個視窗是 16:9 置中的動畫區。字級用 vw 或 vmin，手機和電腦都不能超出畫面。每行最多 16 個中文字。
+5. 時間：四個場景依序播放，總長 15 秒（3 秒、4 秒、5 秒、3 秒）。一打開就自動播。場景切換只改 opacity，不要用 display:none 或 visibility:hidden。
+6. 播完停在最後一個畫面，右下角出現「▶ 再播一次」，按了先把所有元素恢復原狀再從頭播。
+7. 寫完自己檢查：第 1.5、5、10、14 秒畫面上看得到哪些字，要和四段內容一致，任何時候都不能整片空白。
+
+## 回覆格式
+先給程式碼區塊，再用兩句話告訴使用者：
+- 「直接在右邊預覽看動畫；或把程式碼存成 animation.html，雙擊用瀏覽器打開。」
+- 「想要影片檔，可以用螢幕錄影錄下來（Mac 按 ⌘⇧5，Windows 按 Win+Alt+R）。」
+</pre></div>
+
+<h2>授權說明</h2>
+<ul class="note">
+  <li><a href="https://animejs.com">Anime.js</a>（做網頁動畫的 JavaScript 工具）3.2.2：MIT 授權，可免費商用。從 cdnjs 載入（Claude 的 Artifact 預覽允許這個網址）。</li>
+  <li>動畫裡的字型 Noto Sans TC：SIL Open Font License 1.1，可免費商用，從 Google Fonts 載入。</li>
+  <li>這個頁面用你電腦內建的字型，沒有另外載入字型。</li>
+  <li>這頁的原始碼：<a href="https://github.com/589411/lab-explainer-animate">589411/lab-explainer-animate</a></li>
+  <li>提示詞、技能檔、範例動畫：歡迎複製、修改、拿去教學。</li>
+</ul>
+</main>
+<script>
+document.querySelectorAll('button[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  const t = document.getElementById(b.dataset.copy).textContent;
+  try { await navigator.clipboard.writeText(t); b.textContent = '已複製 ✓'; }
+  catch (e) { b.textContent = '請手動選取'; }
+  setTimeout(() => b.textContent = '複製', 1800);
+}));
+</script>
+</body></html>
